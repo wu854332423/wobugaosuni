@@ -1,0 +1,51 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: silent
+external-controller: 127.0.0.1:9090
+proxies:
+  - {name: 🇪🇺 HKGOV-AWSEU, server: 123.wobugaosuni.workers.dev, port: 443, type: vmess, uuid: ad806487-2d26-4636-98b6-ab85cc8521f7, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: 123.wobugaosuni.workers.dev}}
+  - {name: US-GCP, server: acc.up.railway.app, port: 443, type: vmess, uuid: c206cb99-b4b7-4254-92e4-0c6f61d5a96a, alterId: 0, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: acc.up.railway.app}}
+  - {name: US-GCP-CDN, server: www.gov.hk, port: 443, type: vmess, uuid: c206cb99-b4b7-4254-92e4-0c6f61d5a96a, alterId: 0, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: us.klee.ml}}
+proxy-groups:
+  - name: Proxies
+    type: select
+    proxies:
+      - 🇪🇺 HKGOV-AWSEU
+      - US-GCP
+      - US-GCP-CDN
+rules:
+ - DOMAIN-SUFFIX,1password.com,DIRECT
+ - DOMAIN-SUFFIX,vultr.com,DIRECT
+ - DOMAIN-SUFFIX,mb3admin.com,DIRECT
+ - DOMAIN-SUFFIX,rixcloud.io,DIRECT
+ - DOMAIN-SUFFIX,tempestapp.io,DIRECT
+ - DOMAIN,mtalk.google.com,DIRECT
+ - DOMAIN,alt1-mtalk.google.com,DIRECT
+ - DOMAIN,alt2-mtalk.google.com,DIRECT
+ - DOMAIN,alt3-mtalk.google.com,DIRECT
+ - DOMAIN,alt4-mtalk.google.com,DIRECT
+ - DOMAIN,alt5-mtalk.google.com,DIRECT
+ - DOMAIN,alt6-mtalk.google.com,DIRECT
+ - DOMAIN,alt7-mtalk.google.com,DIRECT
+ - DOMAIN,alt8-mtalk.google.com,DIRECT
+ - DOMAIN,alt9-mtalk.google.com,DIRECT
+ - DOMAIN,captive.apple.com,DIRECT
+ - DOMAIN,time-ios.apple.com,DIRECT
+ - DOMAIN-SUFFIX,gateway.push-apple.com.akadns.net,DIRECT
+ - DOMAIN-SUFFIX,push.apple.com,DIRECT
+ - DOMAIN-KEYWORD,baidu,DIRECT
+ - DOMAIN-SUFFIX,erebor.douban.com,DIRECT
+ - DOMAIN-KEYWORD,github,Proxies
+ - DOMAIN-SUFFIX,github.com,Proxies
+ - DOMAIN-SUFFIX,github.io,Proxies
+ - DOMAIN-SUFFIX,githubapp.com,Proxies
+ - DOMAIN-SUFFIX,githubassets.com,Proxies
+ - DOMAIN-SUFFIX,githubusercontent.com,Proxies
+ - DOMAIN-SUFFIX,home-intl.console.aliyun.com,Proxies
+ - DOMAIN,ip.skk.moe,Proxies
+ - DOMAIN,ip.sb,Proxies
+ - DOMAIN-SUFFIX,googleapis.cn,Proxies
+ - GEOIP,CN,DIRECT
+ - MATCH,Proxies
